@@ -8,12 +8,12 @@ export const journalEntriesSlice = createSlice({
   name: "journalEntries",
   initialState,
   reducers: {
-    addJournalEntries: (state, action) => {
+    addJournalEntry: (state, action) => {
       state.value.push(action.payload);
-    }
+    },
   }
 });
 
-export const { addJournalEntries } = journalEntriesSlice.actions
+export const { addJournalEntry } = journalEntriesSlice.actions
 
 export default journalEntriesSlice.reducer;

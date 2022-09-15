@@ -1,17 +1,23 @@
 import * as React from 'react';
+import { useDispatch } from "react-redux";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { addJournalEntry } from "./../features/journalEntriesSlice";
 
 export default function AddJournalEntry() {
-  const [value, setValue] = React.useState("");
+  const [journalEntryInput, setJournalEntryInput] = React.useState("");
+
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
-    setValue(e.target.value);
+    setJournalEntryInput(e.target.value);
   }
 
-  const handleSubmit = (e) => {
-    console.log('the entry has been added');
+  const handleAddEntry = (e) => {
+    if (!journalEntryInput) return;
+    dispatch(addJournalEntry(journalEntryInput));
+    setJournalEntryInput("");
   }
 
   return (
@@ -30,12 +36,12 @@ export default function AddJournalEntry() {
             fullWidth
             multiline
             maxRows={1000}
-            value={value}
+            value={journalEntryInput}
             onChange={handleChange}
           />
         </div>
       </Box>
-      <Button variant="contained" type="submit" onClick={handleSubmit}>Add Entry</Button>
+      <Button variant="contained" type="submit" onClick={handleAddEntry}>Add Entry</Button>
     </form>
   );
 }
